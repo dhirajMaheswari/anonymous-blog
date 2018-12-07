@@ -1,0 +1,62 @@
+
+{% load blog_tags %}
+{% load static %}
+
+<html>
+    <head>
+    	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel = "stylesheet" href="{% static "css/blog.css" %}">
+        <title>Anonymous Blogs</title>
+    </head>
+        <!--
+      <div style="padding-left: 600">
+        <img src= "{% static 'self.jpg' %}" width = "150" height = "100" alt="admin" >
+    </div>
+    -->
+    <body>
+        <!--
+                <div id = "sidebar">
+        <h2>Side Contents</h2>
+        <p>There are {% total_posts %} posts so far.</p>
+
+    </div>
+    -->
+    <div id = "header" align="right">
+        <h1 align="center"><font color = 'violet'>Post anything and interact anonymously</font></h1>
+        {% include 'test.html' %}
+ </div>
+    <div>
+        
+        
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+    <div>
+        <!--only allow the authenticated user to add post
+        {% if user.is_authenticated %}
+    <a href="{% url 'post_new' %}" >Add New Post</a>
+        {% endif %}
+        -->
+
+        <a href="{% url 'post_new' %}" >Add New Post</a><font color = 'red' size = 6>|</font>
+        <a href ="{% url 'post_list' %}">Show Post List</a><font color = 'red' size = 6>|</font>
+        <a href = "{% url 'about' %}">About</a><font color = 'red' size = 6>|</font> 
+        <a href="javascript:window.close();">close</a> 
+    </div>
+    {% include "pagination.html" with page=posts %}
+    <div style="display: inline-block">  
+    <video width="250" height="300" autoplay loop><source src="{% static 'sine.mp4' type="video/mp4 %}">
+    Your browser doesn't support video tag.</video>
+
+    <video width="250" height="300" autoplay loop><source src="{% static 'diffusion.mp4' type="video/mp4 %}">
+    Your browser doesn't support video tag.</video>
+    
+
+    </div>
+
+</body>
+</html>

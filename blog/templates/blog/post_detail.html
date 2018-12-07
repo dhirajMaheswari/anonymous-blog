@@ -1,0 +1,44 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div>
+        {% if post.published_date %}
+        <!--
+            <div>
+                {{ post.published_date }}
+            </div>
+          -->  
+        {% endif %}
+        
+        <h2><font color = 'red'>{{ post.title }}</font></h2> posted by <strong>{{post.author}}</strong>
+        <p><font color = 'green'><i>Post Content -->     </i></font>{{ post.text|linebreaksbr }}</p>
+    </div>
+    <div>
+    	<!-- this part can be used to only allow admin (for now) to edit. but we disable editing the post.
+    	{% if user.is_authenticated %}
+    	<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    {% endif %}
+-->
+</div>
+<!--
+       {% if user.is_authenticated %}
+       <a href = "{% url 'post_remove' pk = post.pk %"}>Delete Post</a>	
+       {% endif %}
+   -->
+
+<hr>
+<u><font color = 'blue' size = 4>Interactions:</font></u>
+
+{% for comment in post.comments.all %}
+    <div >
+        <div>On {{ comment.created_date }}</div>
+        <strong>{{ comment.author }} says:</strong>
+        {{ comment.text|linebreaks }}
+
+    </div>
+{% empty %}
+    <p><strong>No one has interacted on this post yet.</strong></p>
+{% endfor %}   
+<a href="{% url 'add_comment_to_post' pk=post.pk %}">Add Interaction</a>
+
+{% endblock %}

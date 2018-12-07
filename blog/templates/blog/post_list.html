@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+<p> <font size = 6> Following are the published post titles</font></p>
+
+<hr>
+    {% for post in posts %}
+        <div class="post">
+        	<!--
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        -->
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a> </h1>published on {{post.published_date}}
+            
+            <!--<p>{{ post.text|linebreaksbr }}</p> -->
+            <a href="{% url 'post_detail' pk=post.pk %}">Interactions Count: {{ post.comments.count }}</a>
+        </div>
+    {% endfor %}
+<hr>
+
+{% endblock %}
